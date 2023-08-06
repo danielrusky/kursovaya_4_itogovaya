@@ -2,16 +2,13 @@ from abc import ABC, abstractmethod
 import requests
 from os import environ
 
-from api_keys import super_job_key
-
 URL_HH = 'https://api.hh.ru/vacancies'
 URL_SJ = 'https://api.superjob.ru/2.0/vacancies/'
+SUPER_JOB_API_KEY = environ.get('SJ_API_KEY')
 
 
 class APIWorker(ABC):
-    """
-    Абстрактный класс для работы с API
-    """
+    """ Абстрактный класс для работы с API """
 
     def __init__(self):
         self.vacancies = None
@@ -58,7 +55,7 @@ class SuperJobAPI(APIWorker):
 
     def get_vacancies(self, query: str) -> dict:
         print(f'\nПолучаем данные с {URL_SJ}...')
-        headers = {'X-Api-App-Id': super_job_key}
+        headers = {'X-Api-App-Id': SUPER_JOB_API_KEY}
         params = {
             'keywords': query,
             'page': 0,
@@ -78,5 +75,3 @@ class SuperJobAPI(APIWorker):
             else:
                 break
         return self.vacancies
-
-

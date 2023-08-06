@@ -4,9 +4,6 @@ from api_classes import HeadHunterAPI, SuperJobAPI
 from json_interaction import SortFileJSON, SaveToJSON, LoadFileJSON, DeleteFileJSON, \
     RespondFileJSON, hh_for_dict, sj_for_dict, sorted_data, instance_vacancy_sorted, top_n_vacancies
 
-SUPER_JOB_API_KEY = os.environ.get('sj_key')
-
-
 # Создание экземпляра класса для работы с API сайтов с вакансиями
 hh_api = HeadHunterAPI()
 superjob_api = SuperJobAPI()
@@ -85,6 +82,3 @@ def user_interaction():
 
 if __name__ == "__main__":
     user_interaction()
-
-
-
