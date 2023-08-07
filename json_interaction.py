@@ -139,9 +139,12 @@ class SaveToJSON(APIIteraction):
     """
 
     def add_vacancy(self, vacancy, filename):
+        new_list = []
+        for item in vacancy:
+            new_list.append(item.__dict__)
         with open(filename, 'w', encoding='UTF-8') as f:
-            f.write(json.dumps(vacancy, indent=2, ensure_ascii=False))
-        print(f'\nЗаписано {len(vacancy)} вакансий в файл {filename}')
+            f.write(json.dumps(new_list, indent=2, ensure_ascii=False))
+        print(f'\nЗаписано {len(new_list)} вакансий в файл {filename}')
 
     def add_vacancies(self, vacancy, vacancy2, filename):
         new_list = []
@@ -178,7 +181,7 @@ class LoadFileJSON(APIIteraction):
             if item['salary_from'] is None:
                 continue
             if salary <= item['salary_from']:
-                new_list.append(item)
+                new_list.append(Vacancy(**item))
         return new_list
 
 
@@ -217,9 +220,12 @@ class RespondFileJSON(APIIteraction):
 
 class SortFileJSON(APIIteraction):
     def add_vacancy(self, vacancy, filename):
+        new_list = []
+        for item in list_vacancy:
+            new_list.append(item.__dict__)
         with open(filename, 'w', encoding='UTF-8') as f:
-            f.write(json.dumps(vacancy, indent=2, ensure_ascii=False))
-        print(f'\nЗаписано {len(vacancy)} вакансий в файл {filename} соответствующих запросу')
+            f.write(json.dumps(new_list, indent=2, ensure_ascii=False))
+        print(f'\nЗаписано {len(new_list)} вакансий в файл {filename} соответствующих запросу')
 
     def sorted_data(list_vacancies):
         """
